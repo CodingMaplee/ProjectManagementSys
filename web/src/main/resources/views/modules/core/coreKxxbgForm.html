@@ -1,0 +1,136 @@
+<% layout('/layouts/default.html', {title: '可行性评估报告管理', libs: ['validate']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreKxxbg.isNewRecord ? '新增可行性评估报告' : '编辑可行性评估报告')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreKxxbg}" action="${ctx}/core/coreKxxbg/save" method="post" class="form-horizontal">
+		<div class="table-fdiv width-1280">
+			<h3>可行性评估报告</h3>
+			<div style="display: flex; align-items: center;">
+				<span style="margin-right: 10px;">日期：</span>
+				<#form:input path="kxxbgRq" maxlength="100" class="form-control required" style="width: 100px;"/>
+			</div>
+			<table class="table-form">
+				<tr class="form-title">
+					<td colspan="6">
+						项目名称：<#form:select path="kxxbgXmmc" dictType="" blankOption="true" class="form-control" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						一、设计方案说明：<#form:textarea path="kxxbgSjfasm" id="kxxbgSjfasmId"
+						class="form-control " rows="40"/>              </td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						二、可行性分析（包括技术、工艺、风险、材料等方面）：<#form:textarea path="kxxbgKxxfxbkjsgyfxcldfm" id="kxxbgKxxfxbkjsgyfxcldfmId"
+						class="form-control " rows="15"/>                    </td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						三、项目准备：<#form:textarea path="kxxbgXmzb" id="kxxbgXmzbId"
+						class="form-control " rows="5"/>                    </td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						四、开发时程预估：<#form:textarea path="kxxbgKfscyg" id="kxxbgKfscygId"
+						class="form-control " rows="10"/>                    </td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						五、预计参与研发人员：<#form:textarea path="kxxbgYjcyyfry" id="kxxbgYjcyyfryId"
+						class="form-control " rows="10"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						批准：<#form:textarea path="kxxbgPz" id="kxxbgPzId"
+						class="form-control " rows="1"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						审核：<#form:textarea path="kxxbgSh" id="kxxbgShId"
+						class="form-control " rows="1"/>  </td>
+				</tr>
+			</table>
+		</div>
+		<div class="box-footer">
+			<div class="row">
+				<div class="col-sm-offset-2 col-sm-10">
+					<% if (hasPermi('core:coreKxxbg:edit')){ %>
+					<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+					<% } %>
+					<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+				</div>
+			</div>
+		</div>
+	</#form:form>
+</div>
+</div>
+<% } %>
+<script>
+	$("#inputForm").validate({
+		submitHandler: function(form){
+			js.ajaxSubmitForm($(form), function(data){
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
+			}, "json");
+		}
+	});
+	$(document).ready(function() {
+		// 使用 Ajax 从项目档案表接口获取项目信息
+		$.ajax({
+			url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+			type: 'GET',
+			success: function(response) {
+				if (response && response.list) {
+					// 清空现有的下拉框选项
+					$('#kxxbgXmmc').empty();
+					// 添加默认选择项
+					$('#kxxbgXmmc').append('<option value="">-- 请选择项目名称 --</option>');
+
+					// 遍历接口返回的项目数据，动态添加到下拉框中
+					$.each(response.list, function(index, item) {
+						var option = $('<option></option>')
+								.val(item.gcglXmmc)       // 设定 value 为项目名称
+								.text(item.gcglXmmc);  // 显示项目名称
+						$('#kxxbgXmmc').append(option);
+					});
+					// 如果是编辑模式，填充当前选中的项目 ID
+					if ('${coreKxxbg.isNewRecord}' === 'false') {
+						// 假设 `coreYfgstjb` 对象中包含当前项目的 ID
+						var currentProjectId = '${coreKxxbg.kxxbgXmmc}'; // 获取当前项目 ID
+						$('#kxxbgXmmc').val(currentProjectId); // 设置下拉框的值
+					}
+				} else {
+					js.showMessage("加载项目数据失败！");
+				}
+			},
+			error: function() {
+				js.showMessage("获取项目数据时发生错误！");
+			}
+		});
+	});
+
+</script>

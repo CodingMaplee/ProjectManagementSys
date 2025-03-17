@@ -1,0 +1,196 @@
+<% layout('/layouts/default.html', {title: '研究开发机构和项目组的编制情况 及主要成员名单管理', libs: ['validate','fileupload']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreYjkfjghxmzdbzqkjzycymd.isNewRecord ? '新增研究开发机构和项目组的编制情况 及主要成员名单' : '编辑研究开发机构和项目组的编制情况 及主要成员名单')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreYjkfjghxmzdbzqkjzycymd}" action="${ctx}/core/coreYjkfjghxmzdbzqkjzycymd/save" method="post" class="form-horizontal">
+			<div class="table-fdiv width-1280">
+				<h3>研究开发机构和项目组的编制情况
+					及主要成员名单</h3>
+				<table class="table-form">
+					<tr>
+						<td colspan="6">
+							一、研究开发机构及项目组的编制情况：<#form:textarea path="yjkfjghxmzdbzqkjzycymdYjkfjgjxmzdbzqk" id="yjkfjghxmzdbzqkjzycymdYjkfjgjxmzdbzqkId"
+							class="form-control required" rows="10"/>					</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							二、项目主要成员及分工：<#form:textarea path="yjkfjghxmzdbzqkjzycymdXmzycyjfg" id="yjkfjghxmzdbzqkjzycymdXmzycyjfgId"
+							class="form-control required" rows="2"/>					</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							研究开发项目组人员名单：<#form:textarea path="yjkfjghxmzdbzqkjzycymdYjkfxmzrymd" id="yjkfjghxmzdbzqkjzycymdYjkfxmzrymdId"
+							class="form-control" rows="1"/>
+							</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							项目总指挥：<#form:textarea path="yjkfjghxmzdbzqkjzycymdXmzzh" id="yjkfjghxmzdbzqkjzycymdXmzzhId"
+							class="form-control" rows="1"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							项目指导：<#form:textarea path="yjkfjghxmzdbzqkjzycymdXmzd" id="yjkfjghxmzdbzqkjzycymdXmzdId"
+							class="form-control" rows="1"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							项目技术负责人：<#form:textarea path="yjkfjghxmzdbzqkjzycymdXmjsfzr" id="yjkfjghxmzdbzqkjzycymdXmjsfzrId"
+							class="form-control" rows="1"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							项目从事研发人员：<#form:textarea path="yjkfjghxmzdbzqkjzycymdXmcsyfry" id="yjkfjghxmzdbzqkjzycymdXmcsyfryId"
+							class="form-control" rows="1"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="box-body">
+				<div class="form-unit">${text('基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('项目编号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select id="yjkfjghxmzdbzqkjzycymdXmbh" name="yjkfjghxmzdbzqkjzycymdXmbh" class="form-control">
+									<option value="">-- 请选择项目编号 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('项目名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select id="yjkfjghxmzdbzqkjzycymdXmmc" name="yjkfjghxmzdbzqkjzycymdXmmc" class="form-control">
+									<option value="">-- 请选择项目名称 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2">
+								<span class="required hide">*</span> ${text('附件上传')}：</label>
+							<div class="col-sm-10">
+								<#form:fileupload id="uploadFile" bizKey="${coreYjkfjghxmzdbzqkjzycymd.id}" bizType="coreYjkfjghxmzdbzqkjzycymd_file"
+									uploadType="all" class="" readonly="false" preview="true" dataMap="true"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('core:coreYjkfjghxmzdbzqkjzycymd:edit')){ %>
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#yjkfjghxmzdbzqkjzycymdXmbh').empty();
+				// 添加默认选择项
+				$('#yjkfjghxmzdbzqkjzycymdXmbh').append('<option value="">-- 请选择项目编号 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmbh)       // 设定 value 为项目的ID
+							.text(item.gcglXmbh);  // 显示项目的ID
+					$('#yjkfjghxmzdbzqkjzycymdXmbh').append(option);
+				});
+				// 如果是编辑模式，填充当前选中的项目 ID
+				if ('${coreYjkfjghxmzdbzqkjzycymd.isNewRecord}' === 'false') {
+					// 假设 `coreYjkfjghxmzdbzqkjzycymd` 对象中包含当前项目的 ID
+					var currentProjectId = '${coreYjkfjghxmzdbzqkjzycymd.yjkfjghxmzdbzqkjzycymdXmbh}'; // 获取当前项目 ID
+					$('#yjkfjghxmzdbzqkjzycymdXmbh').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+});
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#yjkfjghxmzdbzqkjzycymdXmmc').empty();
+				// 添加默认选择项
+				$('#yjkfjghxmzdbzqkjzycymdXmmc').append('<option value="">-- 请选择项目名称 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmmc)       // 设定 value 为项目名称
+							.text(item.gcglXmmc);  // 显示项目名称
+					$('#yjkfjghxmzdbzqkjzycymdXmmc').append(option);
+				});
+				// 如果是编辑模式，填充当前选中的项目名称
+				if ('${coreYjkfjghxmzdbzqkjzycymd.isNewRecord}' === 'false') {
+					// 假设 `coreYjkfjghxmzdbzqkjzycymd` 对象中包含当前项目的名称
+					var currentProjectId = '${coreYjkfjghxmzdbzqkjzycymd.yjkfjghxmzdbzqkjzycymdXmmc}'; // 获取当前项目名称
+					$('#yjkfjghxmzdbzqkjzycymdXmmc').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+});
+</script>

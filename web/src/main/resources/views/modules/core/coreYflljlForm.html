@@ -1,0 +1,150 @@
+<% layout('/layouts/default.html', {title: '研发领料记录管理', libs: ['validate']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreYflljl.isNewRecord ? '新增研发领料记录' : '编辑研发领料记录')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreYflljl}" action="${ctx}/core/coreYflljl/save" method="post" class="form-horizontal">
+			<div class="box-body">
+				<div class="form-unit">${text('基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('研发领料日期')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="yflljlYfllrq" readonly="true" maxlength="20" class="form-control laydate"
+									dataFormat="datetime" data-type="datetime" data-format="yyyy-MM-dd HH:mm"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('领用研发项目编号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select id="yflljlLyyfxmbh" name="yflljlLyyfxmbh" class="form-control">
+									<option value="">-- 请选择项目 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('物料类别')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="yflljlWllb" maxlength="100" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('物料名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="yflljlWlmc" maxlength="100" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('领用数量')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="yflljlLysl" class="form-control digits"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('领用金额')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="yflljlLyje" maxlength="17" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('core:coreYflljl:edit')){ %>
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#yflljlLyyfxmbh').empty();
+				// 添加默认选择项
+				$('#yflljlLyyfxmbh').append('<option value="">-- 请选择项目 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmbh)       // 设定 value 为项目的 ID
+							.text(item.gcglXmbh);  // 显示项目的 ID
+					$('#yflljlLyyfxmbh').append(option);
+				});
+				// 如果是编辑模式，填充当前选中的项目 ID
+				if ('${coreYflljl.isNewRecord}' === 'false') {
+					// 假设 `coreYflljl` 对象中包含当前项目的 ID
+					var currentProjectId = '${coreYflljl.yflljlLyyfxmbh}'; // 获取当前项目 ID
+					$('#yflljlLyyfxmbh').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+
+
+});
+</script>

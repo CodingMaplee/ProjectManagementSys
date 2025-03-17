@@ -1,0 +1,462 @@
+<% layout('/layouts/default.html', {title: '试产报告管理', libs: ['validate','fileupload']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreDecscbg.isNewRecord ? '新增试产报告' : '编辑试产报告')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreDecscbg}" action="${ctx}/core/coreDecscbg/save" method="post" class="form-horizontal">
+		<div class="table-fdiv width-1280">
+			<h3>试产报告</h3>
+			<table class="table-form">
+				<tr class="form-title">
+					<td colspan="2" width="300">
+						试产日期：<#form:textarea path="decscbgScrq" id="decscbgScrqId"
+						class="form-control " rows="1"/>					</td>
+					<td colspan="3" width="300">
+						试产日期：<#form:textarea path="decscbgScdw" id="decscbgScdwId"
+						class="form-control " rows="1"/>					</td>
+					<td colspan="3" width="300">
+						试产类型：<#form:textarea path="decscbgSclx" id="decscbgSclxId"
+						class="form-control " rows="1"/>					</td>
+				</tr>
+				<tr>
+					<td colspan="2" width="300">
+						产品名称：<#form:textarea path="decscbgCpmc" id="decscbgCpmcId"
+						class="form-control " rows="1"/>					</td>
+					<td colspan="6" width="600">
+						项目名称：<#form:select path="decscbgXmmc" dictType="" blankOption="true" class="form-control" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" width="300">
+						成品料号：<#form:textarea path="decscbgCplh" id="decscbgCplhId"
+						class="form-control " rows="1"/>					</td>
+					<td colspan="3" width="300">
+						试产数量：<#form:textarea path="decscbgScsl" id="decscbgScslId"
+						class="form-control " rows="1"/>					</td>
+					<td colspan="3" class="form-label" width="300"> 第二次试产</td>
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="150"> 序号</td>
+					<td colspan="1" class="form-label" width="250"> 问题点</td>
+					<td colspan="1" class="form-label" width="300"> 原因分析</td>
+					<td colspan="1" class="form-label" width="300"> 解决方案</td>
+					<td colspan="1" class="form-label" width="300"> 预计完成时间</td>
+					<td colspan="1" class="form-label" width="300"> 实际完成时间</td>
+					<td colspan="1" class="form-label" width="300"> 结果</td>
+					<td colspan="1" class="form-label" width="100"> 负责人</td>
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 1</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd1" id="decscbgWtd1Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx1" id="decscbgYyfx1Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa1" id="decscbgJjfa1Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj1" id="decscbgYjwcsj1Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj1" id="decscbgSjwcsj1Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg1" id="decscbgJg1Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr1" id="decscbgFzr1Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 2</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd2" id="decscbgWtd2Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx2" id="decscbgYyfx2Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa2" id="decscbgJjfa2Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj2" id="decscbgYjwcsj2Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj2" id="decscbgSjwcsj2Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg2" id="decscbgJg2Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr2" id="decscbgFzr2Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 3</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd3" id="decscbgWtd3Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx3" id="decscbgYyfx3Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa3" id="decscbgJjfa3Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj3" id="decscbgYjwcsj3Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj3" id="decscbgSjwcsj3Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg3" id="decscbgJg3Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr3" id="decscbgFzr3Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 4</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd4" id="decscbgWtd4Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx4" id="decscbgYyfx4Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa4" id="decscbgJjfa4Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj4" id="decscbgYjwcsj4Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj4" id="decscbgSjwcsj4Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg4" id="decscbgJg4Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr4" id="decscbgFzr4Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 5</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd5" id="decscbgWtd5Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx5" id="decscbgYyfx5Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa5" id="decscbgJjfa5Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj5" id="decscbgYjwcsj5Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj5" id="decscbgSjwcsj5Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg5" id="decscbgJg5Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr5" id="decscbgFzr5Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 6</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd6" id="decscbgWtd6Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx6" id="decscbgYyfx6Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa6" id="decscbgJjfa6Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj6" id="decscbgYjwcsj6Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj6" id="decscbgSjwcsj6Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg6" id="decscbgJg6Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr6" id="decscbgFzr6Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 7</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd7" id="decscbgWtd7Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx7" id="decscbgYyfx7Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa7" id="decscbgJjfa7Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj7" id="decscbgYjwcsj7Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj7" id="decscbgSjwcsj7Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg7" id="decscbgJg7Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr7" id="decscbgFzr7Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 8</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd8" id="decscbgWtd8Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx8" id="decscbgYyfx8Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa8" id="decscbgJjfa8Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj8" id="decscbgYjwcsj8Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj8" id="decscbgSjwcsj8Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg8" id="decscbgJg8Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr8" id="decscbgFzr8Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 9</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd9" id="decscbgWtd9Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx9" id="decscbgYyfx9Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa9" id="decscbgJjfa9Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj9" id="decscbgYjwcsj9Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj9" id="decscbgSjwcsj9Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg9" id="decscbgJg9Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr9" id="decscbgFzr9Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="1" class="form-label" width="50"> 10</td>
+					<td colspan="1" class="form-label" width="150">
+						<#form:input path="decscbgWtd10" id="decscbgWtd10Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYyfx10" id="decscbgYyfx10Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJjfa10" id="decscbgJjfa10Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgYjwcsj10" id="decscbgYjwcsj10Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgSjwcsj10" id="decscbgSjwcsj10Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgJg10" id="decscbgJg10Id" maxlength="150" class="form-control"/>
+					</td>
+					<td colspan="1" class="form-label" width="100">
+						<#form:input path="decscbgFzr10" id="decscbgFzr10Id" maxlength="150" class="form-control"/>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="2" width="300">
+						成品不良数：<#form:textarea path="decscbgCpbls" id="decscbgCpblsId"
+						class="form-control " rows="1"/>					</td>
+					<td colspan="3" width="300">
+						合格成品数：<#form:textarea path="decscbgHgcps" id="decscbgHgcpsId"
+						class="form-control " rows="1"/>					</td>
+					<td colspan="3" width="300">
+						试产合格率：<#form:textarea path="decscbgSchgl" id="decscbgSchglId"
+						class="form-control " rows="1"/>					</td>
+				</tr>
+				<tr>
+					<td colspan="8" width="300">
+						备注：<#form:textarea path="decscbgBz" id="decscbgBzId"
+						class="form-control " rows="4"/>					</td>
+				</tr>
+			</table>
+			<div style="display: flex; align-items: center;">
+				<span style="margin-right: 20px;">批准：</span>
+				<#form:input path="decscbgPz" maxlength="500" class="form-control " style="width: 200px;"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<div style="display: flex; align-items: center;">
+					<span style="margin-right: 20px;">审核：</span>
+					<#form:input path="decscbgSh" maxlength="500" class="form-control " style="width: 200px;"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="display: flex; align-items: center;">
+						<span style="margin-right: 20px;">制定：</span>
+						<#form:input path="decscbgZd" maxlength="500" class="form-control " style="width: 200px;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="box-body">
+			<div class="form-unit">${text('基本信息')}</div>
+			<#form:hidden path="id"/>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('项目编号')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:select path="decscbgXmbh" dictType="" blankOption="true" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2">
+								<span class="required hide">*</span> ${text('附件上传')}：</label>
+							<div class="col-sm-10">
+								<#form:fileupload id="uploadFile" bizKey="${coreDecscbg.id}" bizType="coreDecscbg_file"
+								uploadType="all" class="" readonly="false" preview="true" dataMap="true"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('core:coreDecscbg:edit')){ %>
+						<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+	$("#inputForm").validate({
+		submitHandler: function(form){
+			js.ajaxSubmitForm($(form), function(data){
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
+			}, "json");
+		}
+	});
+	$(document).ready(function() {
+		// 使用 Ajax 从项目档案表接口获取项目信息
+		$.ajax({
+			url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+			type: 'GET',
+			success: function(response) {
+				if (response && response.list) {
+					// 清空现有的下拉框选项
+					$('#decscbgXmbh').empty();
+					// 添加默认选择项
+					$('#decscbgXmbh').append('<option value="">-- 请选择项目编号 --</option>');
+
+					// 遍历接口返回的项目数据，动态添加到下拉框中
+					$.each(response.list, function(index, item) {
+						var option = $('<option></option>')
+								.val(item.gcglXmbh)       // 设定 value 为项目的ID
+								.text(item.gcglXmbh);  // 显示项目的ID
+						$('#decscbgXmbh').append(option);
+					});
+					// 如果是编辑模式，填充当前选中的项目 ID
+					if ('${coreDecscbg.isNewRecord}' === 'false') {
+						// 假设 `coreDecscbg` 对象中包含当前项目的 ID
+						var currentProjectId = '${coreDecscbg.decscbgXmbh}'; // 获取当前项目 ID
+						$('#decscbgXmbh').val(currentProjectId); // 设置下拉框的值
+					}
+				} else {
+					js.showMessage("加载项目数据失败！");
+				}
+			},
+			error: function() {
+				js.showMessage("获取项目数据时发生错误！");
+			}
+		});
+	});
+	$(document).ready(function() {
+		// 使用 Ajax 从项目档案表接口获取项目信息
+		$.ajax({
+			url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+			type: 'GET',
+			success: function(response) {
+				if (response && response.list) {
+					// 清空现有的下拉框选项
+					$('#decscbgXmmc').empty();
+					// 添加默认选择项
+					$('#decscbgXmmc').append('<option value="">-- 请选择项目名称 --</option>');
+
+					// 遍历接口返回的项目数据，动态添加到下拉框中
+					$.each(response.list, function(index, item) {
+						var option = $('<option></option>')
+								.val(item.gcglXmmc)       // 设定 value 为项目名称
+								.text(item.gcglXmmc);  // 显示项目名称
+						$('#decscbgXmmc').append(option);
+					});
+					// 如果是编辑模式，填充当前选中的项目名称
+					if ('${coreDecscbg.isNewRecord}' === 'false') {
+						// 假设 `coreDecscbg` 对象中包含当前项目的名称
+						var currentProjectId = '${coreDecscbg.decscbgXmmc}'; // 获取当前项目名称
+						$('#decscbgXmmc').val(currentProjectId); // 设置下拉框的值
+					}
+				} else {
+					js.showMessage("加载项目数据失败！");
+				}
+			},
+			error: function() {
+				js.showMessage("获取项目数据时发生错误！");
+			}
+		});
+	});
+</script>

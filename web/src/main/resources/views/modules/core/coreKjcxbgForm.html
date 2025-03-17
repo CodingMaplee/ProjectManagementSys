@@ -1,0 +1,364 @@
+<% layout('/layouts/default.html', {title: '科技查新报告管理', libs: ['validate','fileupload']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreKjcxbg.isNewRecord ? '新增科技查新报告' : '编辑科技查新报告')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreKjcxbg}" action="${ctx}/core/coreKjcxbg/save" method="post" class="form-horizontal">
+		<div class="box-body">
+			<div class="top - left" style="display: flex; align-items: center;">
+				<span style="margin-right: 10px;">报告编号 ：</span>
+				<#form:input  type="text" path="kjcxbgBgbh" maxlength="100" class="form-control" style="width: 100px;"/>
+			</div>
+			<div class="top - left" style="display: flex; align-items: center;">
+				<span style="margin-right: 10px;">合同编号 ：</span>
+				<#form:input type="text" path="kjcxbgHtbh" maxlength="100" class="form-control" style="width: 100px;"/>
+			</div>
+			<div class="top-right" style="display: flex; align-items: center;">
+				<label class="control-label col-sm-2">
+					<span class="required hide">*</span> ${text('图片上传')}：</label>
+				<div class="col-sm-10">
+					<#form:fileupload id="uploadImage" bizKey="${coreKjcxbg.id}" bizType="coreKjcxbg_image"
+					uploadType="image" class="" readonly="false" preview="true" dataMap="true"/>
+				</div>
+			</div>
+		</div>
+		<div class="table-fdiv width-1280">
+			<h3>科技查新报告</h3>
+			<table class="table-form">
+				<tr class="form-title">
+					<td colspan="1">项目名称 ：</td>
+					<td colspan="2">
+						<#form:input path="xmjtsXmmc" maxlength="100" class="form-control "/>
+					</td>
+					<td colspan="1">起止时间 ：</td>
+					<td colspan="2">
+						<#form:input path="xmjtsQzrq" maxlength="200" class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6">
+						一、项目简介：<#form:textarea path="xmjtsXmjj" id="xmjtsXmjjId"
+						class="form-control " rows="20"/>              </td>
+				</tr>
+			</table>
+		</div>
+		<div class="box-body">
+			<div class="form-unit">${text('基本信息')}</div>
+			<#form:hidden path="id"/>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('报告编号')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgBgbh" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('合同编号')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgHtbh" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('项目名称')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgXmmc" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('委托人')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgWtr" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('委托日期')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgWtrq" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('查新机构')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgCxjg" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('查新完成日期')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgCxwcrq" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('查新项目名称')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgCxxmmc" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('机构名称')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgJgmc" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('通信地址')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgTxdz" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('邮政编码')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgYzbm" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('电子邮箱')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgDzyx" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('负责人')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgFzr" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('电话')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgDh" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('传真')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgCz" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('联系人')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgLianxiren" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('电话1')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgDh1" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('电话2')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgDh2" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('查新目的')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-10">
+							<#form:textarea path="kjcxbgCxmd" rows="4" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('查新项目的科学技术要点')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-10">
+							<#form:textarea path="kjcxbgCxxmdkxjsyd" rows="4" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('查新点与查新要求')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-10">
+							<#form:textarea path="kjcxbgCxdycxyq" rows="4" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('国内文献检索范围以及检索策略')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-10">
+							<#form:textarea path="kjcxbgGnwxjsfwyjjscl" rows="4" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('检索结果')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-10">
+							<#form:textarea path="kjcxbgJsjg" rows="4" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('国内查新结论')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-10">
+							<#form:textarea path="kjcxbgGncxjl" rows="4" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('查新员审核员申明')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-10">
+							<#form:textarea path="kjcxbgCxyshysm" rows="4" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('立项人')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgLixiangren" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('立项时间')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgLxsj" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="control-label col-sm-4" title="">
+							<span class="required hide">*</span> ${text('立项部门')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-8">
+							<#form:input path="kjcxbgLxbm" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2">
+							<span class="required hide">*</span> ${text('附件上传')}：</label>
+						<div class="col-sm-10">
+							<#form:fileupload id="uploadFile" bizKey="${coreKjcxbg.id}" bizType="coreKjcxbg_file"
+							uploadType="all" class="" readonly="false" preview="true" dataMap="true"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box-footer">
+			<div class="row">
+				<div class="col-sm-offset-2 col-sm-10">
+					<% if (hasPermi('core:coreKjcxbg:edit')){ %>
+					<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+					<% } %>
+					<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+				</div>
+			</div>
+		</div>
+	</#form:form>
+</div>
+</div>
+<% } %>
+<script>
+	$("#inputForm").validate({
+		submitHandler: function(form){
+			js.ajaxSubmitForm($(form), function(data){
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
+			}, "json");
+		}
+	});
+</script>

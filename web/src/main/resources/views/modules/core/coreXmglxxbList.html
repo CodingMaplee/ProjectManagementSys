@@ -1,0 +1,130 @@
+<% layout('/layouts/default.html', {title: '项目信息管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-notebook"></i> ${text('项目信息管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('core:coreXmglxxb:edit')){ %>
+					<a href="${ctx}/core/coreXmglxxb/form" class="btn btn-default btnTool" title="${text('新增立项信息')}"><i class="fa fa-plus"></i> ${text('新增立项信息')}</a>
+				<% } %>
+				<a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${coreXmglxxb}" action="${ctx}/core/coreXmglxxb/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('项目编号')}：</label>
+					<div class="control-inline">
+						<#form:input path="gcglXmbh" maxlength="64" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('项目名称')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="gcglXmmc" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('项目状态')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="gcglXmzt" dictType="sys_proj_state" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('开始时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="gcglKssj" readonly="true" maxlength="20" class="form-control laydate width-date"
+							dataFormat="date" data-type="date" data-format="yyyy-MM-dd"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('结束时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="gcglJssj" readonly="true" maxlength="20" class="form-control laydate width-date"
+							dataFormat="date" data-type="date" data-format="yyyy-MM-dd"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('研发费用预算总金额')}：</label>
+					<div class="control-inline">
+						<#form:input path="xmglxxbYffyyszje" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i> ${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm isQuick"><i class="glyphicon glyphicon-repeat"></i> ${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+//# // 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $('#searchForm'),
+	columnModel: [
+		{header:'${text("项目编号")}', name:'gcglXmbh', index:'a.gcgl_xmbh', width:150, align:"center", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/core/coreXmglxxb/form?id='+row.id+'" class="btnList" data-title="${text("编辑项目管理信息表")}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text("项目名称")}', name:'gcglXmmc', index:'a.gcgl_xmmc', width:250, align:"center"},
+		{header:'${text("项目状态")}', name:'gcglXmzt', index:'a.gcgl_xmzt', width:150, align:"center", formatter: function (val, obj, row, act) {
+			return js.getDictLabel("#{@DictUtils.getDictListJson('sys_proj_state')}", val, '${text("未知")}', true);
+		}},
+		{header:'${text("开始时间")}', name:'gcglKssj', index:'a.gcgl_kssj', width:150, align:"center", formatter: function(val, obj, row, act){
+			// 使用js.formatDate或者其他日期格式化库来格式化日期
+			return val ? val.split(' ')[0] : ''; // 只取日期部分
+		}},
+		{header:'${text("结束时间")}', name:'gcglJssj', index:'a.gcgl_jssj', width:150, align:"center", formatter: function(val, obj, row, act){
+			// 使用js.formatDate或者其他日期格式化库来格式化日期
+			return val ? val.split(' ')[0] : ''; // 只取日期部分
+		}},
+		{header:'${text("研发费用预算总金额(万元)")}', name:'xmglxxbYffyyszje', index:'a.xmglxxb_yffyyszje', width:100, align:"center", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text("操作")}', name:'actions', width:170, formatter: function(val, obj, row, act){
+			var actions = [];
+			//# if(hasPermi('core:coreXmglxxb:edit')){
+				actions.push('<a href="${ctx}/core/coreXmglxxb/form?id='+row.id+'" class="btnList" title="${text("编辑项目管理信息表")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/core/coreXmglxxb/delete?id='+row.id+'" class="btnList" title="${text("删除项目管理信息表")}" data-confirm="${text("确认要删除该项目管理信息表吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+				//增加的每周工时统计调用按钮
+				actions.push('<a href="${ctx}/core/coreYfgstjb/list?yfgstjbXmid='+row.id+'" class="btnList" title="${text("编辑工时信息")}"><i class="fa fa-calendar"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/core/coreYfgcglb/list?yfgcglbXmid='+row.gcglXmbh+'" class="btnList" title="${text("研发过程管理")}"><i class="fa fa-tags"></i></a>&nbsp;');
+
+
+			//# }
+			return actions.join('');
+		}}
+	],
+	//# // 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+
+$(document).on('click', '.btn-week-selector', function (e) {
+	// 获取项目 ID
+	e.preventDefault(); // 阻止默认行为
+	e.stopPropagation(); // 阻止事件冒泡
+	const projectId = $(this).data('project-id');
+	js.showMessage(projectId);
+
+	// 弹出模态框或跳转页面加载周次选择界面
+	//showWeekSelector(projectId);
+});
+
+// 日期格式化函数：将日期格式化为 yyyy.MM
+function formatDate(dateStr) {
+	if (!dateStr) return '';
+	var date = new Date(dateStr);
+	var year = date.getFullYear();
+	var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 确保月是两位数字
+	return year + '.' + month;
+}
+</script>

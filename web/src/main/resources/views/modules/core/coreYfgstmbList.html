@@ -1,0 +1,353 @@
+<% layout('/layouts/default.html', {title: '研发工时条目', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-notebook"></i> ${text('研发工时条目')}
+			</div>
+			<div class="box-tools pull-right">
+
+				<strong>项目编号:</strong> <span id="projectCode">项目编号</span>
+
+				<strong>周开始日期:</strong> <span id="weekStartDate">2025-01-01</span>
+
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<a href="#" id="dataGridAddRowBtn" class="btn btn-default" title="${text('新增条目')}" onclick="addNewRow()"><i class="fa fa-plus"></i> ${text('新增条目')}</a>
+				<button type="button" id="btnExport" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-export"></i> ${text('导出')}</button>
+				<a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${coreYfgstmb}" action="${ctx}/core/coreYfgstmb/listData" method="post" class="form-inline hide"
+			data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+			<div class="form-group">
+				<label class="control-label">${text('项目Id')}：</label>
+				<div class="control-inline">
+					<#form:input path="projectId" maxlength="64" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('人员Id')}：</label>
+				<div class="control-inline">
+					<select path="employeeId" id="employeeId" name="employeeId" blankOption="true" class="form-control">
+						<option value="">-- 请选择项目人员 --</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('该周开始日期')}：</label>
+				<div class="control-inline">
+					<#form:input path="weekStartDate" maxlength="100" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('周一工时')}：</label>
+				<div class="control-inline">
+					<#form:input path="mondayHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('周二工时')}：</label>
+				<div class="control-inline">
+					<#form:input path="tuesdayHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('周三工时')}：</label>
+				<div class="control-inline">
+					<#form:input path="wednesdayHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('周四工时')}：</label>
+				<div class="control-inline">
+					<#form:input path="thursdayHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('周五工时')}：</label>
+				<div class="control-inline">
+					<#form:input path="fridayHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('周六工时')}：</label>
+				<div class="control-inline">
+					<#form:input path="saturdayHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('周日工时')}：</label>
+				<div class="control-inline">
+					<#form:input path="sundayHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">${text('工时小计')}：</label>
+				<div class="control-inline">
+					<#form:input path="totalHours" maxlength="8" class="form-control width-120"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i> ${text('查询')}</button>
+				<button type="reset" class="btn btn-default btn-sm isQuick"><i class="glyphicon glyphicon-repeat"></i> ${text('重置')}</button>
+			</div>
+		</#form:form>
+		<table id="dataGrid"></table>
+		<div id="dataGridPage"></div>
+	</div>
+</div>
+</div>
+<% } %>
+<script>
+	// 初始化DataGrid对象
+	$('#dataGrid').dataGrid({
+		searchForm: $('#searchForm'),
+		columnModel: [
+			{header:'${text("id")}', name:'id', hidden:true, key: true},
+			{header:'${text("项目编号")}', name:'projectId', hidden:true},
+			{header:'${text("人员选择")}', name:'employeeId', width:100,
+				formatter: function(val, obj, row, act){
+					return js.val(row, 'employeeId');
+				},
+				editable: true,
+				edittype: "select",
+				editoptions: {
+					value: function() {
+						var options = "";
+						$.ajax({
+							url: '${ctx}/dbm/dbmRydab/listData',
+							type: 'GET',
+							async: false,
+							success: function(response) {
+								if(response && response.list) {
+									$.each(response.list, function(index, item) {
+										options += item.id + ':' + item.rydabtXm + (index === response.list.length - 1 ? '' : ';');
+									});
+								}
+							}
+						});
+						return options;
+					},
+					dataInit: function(element) {
+					}
+				}
+			},
+			{header:'${text("该周日期")}', name:'weekStartDate', hidden:true},
+			{header:'${text("周一工时")}', name:'mondayHours', editable:true, edittype:'text', index:'a.monday_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'${text("周二工时")}', name:'tuesdayHours', editable:true, edittype:'text', index:'a.tuesday_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'${text("周三工时")}', name:'wednesdayHours', editable:true, edittype:'text', index:'a.wednesday_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'${text("周四工时")}', name:'thursdayHours', editable:true, edittype:'text', index:'a.thursday_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'${text("周五工时")}', name:'fridayHours', editable:true, edittype:'text', index:'a.friday_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'${text("周六工时")}', name:'saturdayHours', editable:true, edittype:'text', index:'a.saturday_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'${text("周日工时")}', name:'sundayHours', editable:true, edittype:'text', index:'a.sunday_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'${text("工时小计")}', name:'totalHours', editable: false, edittype:'text', index:'a.total_hours', width:100, align:"right", unformat: function(val, obj, cell){
+					return js.formatNumber(val, 2, false, '');
+				}},
+			{header:'操作', name:'actions', width:80, sortable:false, fixed:true, formatter: function(val, obj, row, act){
+					var actions = [];
+					actions.push('<a href="${ctx}/core/coreYfgstmb/delete?id='+row.id+'" class="btnList" title="${text("删除研发工时条目")}" data-confirm="${text("确认要删除该研发工时条目吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+					actions.push('<a href="#" onclick="editRowData(\'' + obj.rowId + '\');return false;" class="btnEdit"><i class="fa fa-pencil"></i></a>&nbsp;');
+					actions.push('<a href="#" onclick="saveRowData(\'' + obj.rowId + '\');return false;" class="btnSave" style="display:none;"><i class="fa fa-check"></i></a>');
+					return actions.join('');
+				},
+				editoptions: {defaultValue: 'new'},
+				unformat: function(val, obj, cell){return '';}
+			}
+		],
+		editGrid: false,
+		showFooter: true,
+		editGridInitRowNum: 1,
+		editGridAddRowBtn: $('#dataGridAddRowBtn'),
+		editGridAddRowInitData: {
+			projectId: new URLSearchParams(window.location.search).get('projectId'),
+			weekStartDate: new URLSearchParams(window.location.search).get('weekStartDate'),
+			status: Global.STATUS_NORMAL
+		},
+		ajaxSuccess: function(data) {
+			const urlParams = new URLSearchParams(window.location.search);
+			const projectId = urlParams.get('projectId');
+			const weekStartDate = urlParams.get('weekStartDate');
+			let totalMondayHours = 0;
+			let totalTuesdayHours = 0;
+			let totalWednesdayHours = 0;
+			let totalThursdayHours = 0;
+			let totalFridayHours = 0;
+			let totalSaturdayHours = 0;
+			let totalSundayHours = 0;
+			let totalWeeklyHours = 0;
+
+			var rowDatas = $('#dataGrid').dataGrid('getRowData');
+			$.each(rowDatas, function(index, row) {
+				var mondayHours = parseFloat(row.mondayHours) || 0;
+				var tuesdayHours = parseFloat(row.tuesdayHours) || 0;
+				var wednesdayHours = parseFloat(row.wednesdayHours) || 0;
+				var thursdayHours = parseFloat(row.thursdayHours) || 0;
+				var fridayHours = parseFloat(row.fridayHours) || 0;
+				var saturdayHours = parseFloat(row.saturdayHours) || 0;
+				var sundayHours = parseFloat(row.sundayHours) || 0;
+
+				totalMondayHours += mondayHours;
+				totalTuesdayHours += tuesdayHours;
+				totalWednesdayHours += wednesdayHours;
+				totalThursdayHours += thursdayHours;
+				totalFridayHours += fridayHours;
+				totalSaturdayHours += saturdayHours;
+				totalSundayHours += sundayHours;
+
+				let rowTotalHours = mondayHours + tuesdayHours + wednesdayHours + thursdayHours + fridayHours + saturdayHours + sundayHours;
+				row.totalHours = rowTotalHours;
+				totalWeeklyHours += rowTotalHours;
+			});
+
+			$('#dataGrid').dataGrid("footerData", "set", {
+				"projectId": "<center><em>合计：</em></center>",
+				"employeeId": "<em>人数:" + data.count + "</em>人",
+				"mondayHours": "<em>" + totalMondayHours.toFixed(1) + " &nbsp;</em>",
+				"tuesdayHours": "<em>" + totalTuesdayHours.toFixed(1) + " &nbsp;</em>",
+				"wednesdayHours": "<em>" + totalWednesdayHours.toFixed(1) + " &nbsp;</em>",
+				"thursdayHours": "<em>" + totalThursdayHours.toFixed(1) + " &nbsp;</em>",
+				"fridayHours": "<em>" + totalFridayHours.toFixed(1) + " &nbsp;</em>",
+				"saturdayHours": "<em>" + totalSaturdayHours.toFixed(1) + " &nbsp;</em>",
+				"sundayHours": "<em>" + totalSundayHours.toFixed(1) + " &nbsp;</em>",
+				"totalHours": "<em>" + totalWeeklyHours.toFixed(1) + " &nbsp;</em>"
+			}, false);
+		}
+	});
+
+	function addNewRow() {
+		const urlParams = new URLSearchParams(window.location.search);
+		var newRowData = {
+			id: '',
+			projectId: urlParams.get('projectId'),
+			weekStartDate: urlParams.get('weekStartDate'),
+			employeeId: '',
+			workHours: ''
+		};
+		$.ajax({
+			url: '${ctx}/core/coreYfgstmb/save',
+			type: 'POST',
+			data: newRowData,
+			success: function(response) {
+				$('#dataGrid').dataGrid('reloadGrid');
+			},
+			error: function() {
+				js.showMessage('新增出错');
+			}
+		});
+	}
+
+	function editRowData(rowId) {
+		$('#dataGrid').dataGrid('editRow', rowId, true);
+		$('#' + rowId + ' .btnEdit').hide();
+		$('#' + rowId + ' .btnSave').show();
+	}
+
+	function saveRowData(rowId) {
+		$('#dataGrid').dataGrid('saveRow', rowId);
+		$('#' + rowId + ' .btnSave').hide();
+		$('#' + rowId + ' .btnEdit').show();
+
+		var rowData = $('#dataGrid').dataGrid('getRowData', rowId);
+		var mondayHours = parseFloat(rowData.mondayHours) || 0;
+		var tuesdayHours = parseFloat(rowData.tuesdayHours) || 0;
+		var wednesdayHours = parseFloat(rowData.wednesdayHours) || 0;
+		var thursdayHours = parseFloat(rowData.thursdayHours) || 0;
+		var fridayHours = parseFloat(rowData.fridayHours) || 0;
+		var saturdayHours = parseFloat(rowData.saturdayHours) || 0;
+		var sundayHours = parseFloat(rowData.sundayHours) || 0;
+
+		rowData.totalHours = mondayHours + tuesdayHours + wednesdayHours + thursdayHours + fridayHours + saturdayHours + sundayHours;
+
+		$.ajax({
+			url: '${ctx}/core/coreYfgstmb/save',
+			type: 'POST',
+			data: rowData,
+			success: function(response) {
+				js.showMessage('保存成功');
+				$('#dataGrid').dataGrid('reloadGrid');
+			},
+			error: function() {
+				js.showMessage('保存出错');
+			}
+		});
+	}
+
+	$(document).ready(function() {
+		const urlParams = new URLSearchParams(window.location.search);
+		var projectId = urlParams.get('projectId');
+		var projectName = '';
+		$.ajax({
+			url: '${ctx}/core/coreXmglxxb/getProjectNameById',
+			type: 'GET',
+			data: { projectId: projectId },
+			async: false,
+			success: function(response) {
+				projectName = response;
+			},
+			error: function() {
+				projectName = '获取项目编号失败';
+			}
+		});
+
+		var weekStartDate = urlParams.get('weekStartDate');
+		$('#projectCode').text(projectName);
+		$('#weekStartDate').text(weekStartDate);
+	});
+
+	$('#btnExport').click(function(){
+		// 获取外部传入的数据
+		const urlParams = new URLSearchParams(window.location.search);
+		var projectId_ = urlParams.get('projectId'); // 获取项目ID
+		var projectName = '';  // 默认值为空
+		var weekStartDate = urlParams.get('weekStartDate'); // 获取周开始日期
+
+		// 使用 AJAX 获取项目名称
+		$.ajax({
+			url: '${ctx}/core/coreXmglxxb/getProjectNameById',  // 获取项目名称的接口
+			type: 'GET',
+			data: { projectId: projectId_ },  // 传递项目ID
+			success: function(response) {
+				projectName = response;  // 成功获取项目名称
+				// 请求成功后再提交表单
+				submitForm();
+			},
+			error: function() {
+				projectName = '获取项目名称失败';  // 如果请求失败
+				submitForm();
+			}
+		});
+
+		// 表单提交函数
+		function submitForm() {
+			// 清除表单中的 projectId 字段，避免重复提交
+			$('#searchForm input[name="projectId"]').remove();
+
+			js.ajaxSubmitForm($('#searchForm'), {
+				url: '${ctx}/core/coreYfgstmb/exportExcel',
+				clearParams: 'pageNo,pageSize',
+				downloadFile: true,
+				data: {
+					currentDate: weekStartDate,  // 传递日期参数
+					projectName: projectName,   // 传递项目名称参数
+					projectId: projectId_       // 传递项目ID参数
+				}
+			});
+		}
+	});
+
+</script>

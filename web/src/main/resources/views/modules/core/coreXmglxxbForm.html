@@ -1,0 +1,307 @@
+<% layout('/layouts/default.html', {title: '项目信息管理', libs: ['validate','fileupload']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreXmglxxb.isNewRecord ? '新增项目立项信息' : '编辑项目管理信息')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreXmglxxb}" action="${ctx}/core/coreXmglxxb/save" method="post" class="form-horizontal">
+			<div class="box-body">
+				<div class="form-unit">${text('项目基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('项目编号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="gcglXmbh" id="gcglXmbhId" maxlength="64" class="form-control required"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('项目名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="gcglXmmc" id="gcglXmmcId" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('项目状态')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:select path="gcglXmzt" dictType="sys_proj_state" class="form-control required" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('开始时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="gcglKssj" id="gcglKssjId" readonly="true" maxlength="20" class="form-control laydate required"
+									dataFormat="date" data-type="date" data-format="yyyy-MM-dd"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('结束时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="gcglJssj" id="gcglJssjId" readonly="true" maxlength="20" class="form-control laydate required"
+									dataFormat="date" data-type="date" data-format="yyyy-MM-dd"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2">
+								<span class="required hide">*</span> ${text('项目材料上传')}：</label>
+							<div class="col-sm-8">
+								<#form:fileupload id="uploadFile" bizKey="${coreXmglxxb.id}" bizType="coreXmglxxb_file"
+								uploadType="all" class="" readonly="false" preview="true" dataMap="true"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-unit">${text('人员与预算信息')}</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('项目负责人')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select path="gcglXmfzr" id="gcglXmfzrId" name="gcglXmfzr" class="form-control">
+									<option value="">-- 请选择负责人 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('项目人员')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select path="gcglXmry" id="gcglXmryId" name="gcglXmry" multiple="true" blankOption="true" class="form-control">
+									<option value="">-- 请选择项目人员 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('项目研发设备')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select path="gcglXmyfsb" id="gcglXmyfsbId" name="gcglXmyfsb" multiple="true" blankOption="true" class="form-control">
+									<option value="">-- 请选择设备 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required ">*</span> ${text('研发费用预算总金额')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="xmglxxbYffyyszje" id="xmglxxbYffyyszjeId" maxlength="17" class="form-control required number"/>
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-sm btn-default" id="btnDetail" onclick="js.clickDetail()">
+									<i class="fa fa-reply-all"></i> ${text('明 细')}
+								</button>
+							</div>
+						</div>
+					</div>
+					<#form:input path="xmglxxbYffyysmxb" id="xmglxxbYffyysmxbId" type="hidden" />
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('core:coreXmglxxb:edit')){ %>
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">明细表编辑</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- 明细表内容 -->
+				<iframe id="detailIframe" style="width: 100%; height: 600px; border: none;"></iframe>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% } %>
+<script>
+$(document).ready(function() {
+	// 使用 Ajax 从人员档案表接口获取员工信息
+	$.ajax({
+		url: '${ctx}/dbm/dbmRydab/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#gcglXmfzrId').empty();
+				// 添加默认选择项
+				$('#gcglXmfzrId').append('<option value="">-- 请选择负责人 --</option>');
+
+				// 遍历接口返回的员工数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var selected = ''; // 判断是否选中
+					// 判断当前选项是否为已存储的负责人ID
+					if (item.id == '${coreXmglxxb.gcglXmfzr}') {
+						selected = 'selected="selected"';
+					}
+					var option = '<option value="' + item.id + '" ' + selected + '>' + item.rydabtXm + '</option>';  // 显示项目的 ID
+					$('#gcglXmfzrId').append(option);
+					$('#gcglXmryId').append(option);
+				});
+
+				// 如果当前编辑的数据已有项目人员信息，则选中这些人员
+				var existingXmry = "${coreXmglxxb.gcglXmry}"; // 从服务器获取当前选中的项目人员
+				if (existingXmry) {
+					var selectedValues = existingXmry.split(","); // 假设存储为逗号分隔字符串
+					$('#gcglXmryId').val(selectedValues);
+				}
+			} else {
+				js.showMessage("加载员工数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取员工数据时发生错误！");
+		}
+	});
+	// 加载设备信息到项目研发设备多选框
+	$.ajax({
+		url: '${ctx}/dbm/dbmSbdab/listData', // 设备档案表接口
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空多选框的现有选项
+				$('#gcglXmyfsbId').empty();
+
+				// 遍历设备数据，动态添加到多选框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.sbdabZcbm)       // 设备ID
+							.text(item.sbdabSbmc);  // 设备名称
+					$('#gcglXmyfsbId').append(option);
+				});
+				// 如果当前编辑的数据已有设备信息，则选中这些设备
+				var existingXmyfsb = "${coreXmglxxb.gcglXmyfsb}"; // 从服务器获取当前选中的
+				if (existingXmyfsb) {
+					var selectedValues = existingXmyfsb.split(","); // 假设存储为逗号分隔字符串
+					$('#gcglXmyfsbId').val(selectedValues);
+				}
+			} else {
+				js.showMessage("加载设备数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取设备数据时发生错误！");
+		}
+	});
+
+});
+
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+
+js.clickDetail = function() {
+	var xmglxxbYffyysmxbId2 =  $('#xmglxxbYffyysmxbId').val(); //外键ID
+	var gcglXmmcId = $('#gcglXmmcId').val();  // 获取父表的开发项目名称
+	var xmglxxbYffyyszjeId = $('#xmglxxbYffyyszjeId').val();  // 获取父表的研发费用预算总金额
+	var startDate = $('#gcglKssjId').val();
+	var endDate = $('#gcglJssjId').val();
+	// 检查项目名称和日期是否填写
+	if (!gcglXmmcId || !startDate || !endDate || !xmglxxbYffyyszjeId) {
+		// 如果项目名称或日期为空，提示用户并阻止弹出明细表
+		js.showMessage("请先填写项目、预算金额、和起止日期等信息！");
+		return;  // 阻止弹出明细表
+	}
+	// 将日期格式化为 yyyy.MM 的形式
+	var formattedStartDate = formatDate(startDate);
+	var formattedEndDate = formatDate(endDate);
+
+	var detailUrl = '';
+	if (!xmglxxbYffyysmxbId2) {
+		// 如果父表的ID为空，则是新建
+		// 设置明细表的 URL，并传递必要参数
+		detailUrl = '${ctx}/core/coreYffyysmxb/form?yffyysmxbKfxmmcId=' + encodeURIComponent(gcglXmmcId) +
+				'&yffyyszje=' + encodeURIComponent(xmglxxbYffyyszjeId) +
+				'&startEndDate=' + encodeURIComponent(formattedStartDate+"-"+formattedEndDate);
+	} else {
+		// 如果父表的ID不为空，则是编辑
+		detailUrl = '${ctx}/core/coreYffyysmxb/form?id=' + encodeURIComponent(xmglxxbYffyysmxbId2) +
+				'&yffyysmxbKfxmmcId=' + encodeURIComponent(gcglXmmcId) +
+				'&yffyyszje=' + encodeURIComponent(xmglxxbYffyyszjeId) +
+				'&startEndDate=' + encodeURIComponent(formattedStartDate+"-"+formattedEndDate);  // 编辑明细表
+	}
+
+	// 将明细表加载到 iframe
+	$('#detailIframe').attr('src', detailUrl);
+
+	// 打开模态框
+	$('#detailModal').modal('show');
+
+};
+
+// 日期格式化函数：将日期格式化为 yyyy.MM
+function formatDate(dateStr) {
+	if (!dateStr) return '';
+	var date = new Date(dateStr);
+	var year = date.getFullYear();
+	var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 确保月是两位数字
+	return year + '.' + month;
+}
+</script>

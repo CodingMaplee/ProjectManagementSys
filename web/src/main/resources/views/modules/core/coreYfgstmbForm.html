@@ -1,0 +1,164 @@
+<% layout('/layouts/default.html', {title: '研发工时条目表管理', libs: ['validate']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreYfgstmb.isNewRecord ? '新增研发工时条目表' : '编辑研发工时条目表')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreYfgstmb}" action="${ctx}/core/coreYfgstmb/save" method="post" class="form-horizontal">
+		<div class="box-body">
+			<div class="form-unit">${text('基本信息')}</div>
+			<#form:hidden path="id"/>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required ">*</span> ${text('项目Id')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="projectId" maxlength="64" class="form-control required"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('人员Id')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="employeeId" maxlength="64" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('该周日期')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="weekStartDate" maxlength="100" class="form-control"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('周一工时')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="mondayHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('周二工时')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="tuesdayHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('周三工时')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="wednesdayHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('周四工时')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="thursdayHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('周五工时')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="fridayHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('周六工时')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="saturdayHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('周日工时')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="sundayHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-sm-2" title="">
+							<span class="required hide">*</span> ${text('工时小计')}：<i class="fa icon-question hide"></i></label>
+						<div class="col-sm-4">
+							<#form:input path="totalHours" maxlength="8" class="form-control number"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box-footer">
+			<div class="row">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+
+					<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+				</div>
+			</div>
+		</div>
+	</#form:form>
+</div>
+</div>
+<% } %>
+<script>
+	$("#inputForm").validate({
+		submitHandler: function(form){
+			js.ajaxSubmitForm($(form), function(data){
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
+			}, "json");
+		}
+	});
+</script>

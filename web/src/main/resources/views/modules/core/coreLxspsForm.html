@@ -1,0 +1,85 @@
+<% layout('/layouts/default.html', {title: '立项审批书管理', libs: ['validate']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreLxsps.isNewRecord ? '新增立项审批书' : '编辑立项审批书')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreLxsps}" action="${ctx}/core/coreLxsps/save" method="post" class="form-horizontal">
+		<div class="table-fdiv width-1000">
+			<h3>东莞新东方科技有限公司</h3>
+			<h3>立项审批书</h3>
+			<table class="table-form">
+				<tr class="form-title">
+					<td colspan="1">项目名称 ：</td>
+					<td colspan="2">
+						<#form:input path="lxspsXmmc" maxlength="200" class="form-control required"/>
+					</td>
+					<td colspan="1">起止时间 ：</td>
+					<td colspan="2">
+						<#form:input path="lxspsQzsj" maxlength="200" class="form-control required"/>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="1" width="100">立项的目的及意义</td>
+					<td colspan="5">
+						<#form:textarea path="lxspsLxdmdhyy" id="lxspsLxdmdhyyId"
+						class="form-control required" rows="10"/>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="1" width="100">实施方案</td>
+					<td colspan="5">
+						<#form:textarea path="lxspsSsfa" id="lxspsSsfaId"
+						class="form-control required" rows="6"/>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="1" width="100">研发部意见</td>
+					<td colspan="5">
+						<#form:textarea path="lxspsYfbyj" id="lxspsYfbyjId"
+						class="form-control required" rows="4"/>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="1" width="100">公司意见</td>
+					<td colspan="5">
+						<#form:textarea path="lxspsGsyj" id="lxspsGsyjId"
+						class="form-control required" rows="4"/>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="box-footer">
+			<div class="row">
+				<div class="col-sm-offset-2 col-sm-10">
+					<% if (hasPermi('core:coreLxsps:edit')){ %>
+					<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+					<% } %>
+					<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+				</div>
+			</div>
+		</div>
+	</#form:form>
+</div>
+</div>
+<% } %>
+<script>
+	$("#inputForm").validate({
+		submitHandler: function(form){
+			js.ajaxSubmitForm($(form), function(data){
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
+			}, "json");
+		}
+	});
+</script>

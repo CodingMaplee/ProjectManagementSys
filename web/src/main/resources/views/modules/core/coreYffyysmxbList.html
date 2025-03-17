@@ -1,0 +1,207 @@
+<% layout('/layouts/default.html', {title: '研发费用预算明细表管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-notebook"></i> ${text('研发费用预算明细表管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('core:coreYffyysmxb:edit')){ %>
+					<a href="${ctx}/core/coreYffyysmxb/form" class="btn btn-default btnTool" title="${text('新增研发费用预算明细表')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+				<a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${coreYffyysmxb}" action="${ctx}/core/coreYffyysmxb/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('开发项目名称')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbKfxmmc" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('项目预期研发时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbXmyqyfsj" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('研发费用预算总金额')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbYffyyszje" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('企业自筹投入')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbQyzctr" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('其他渠道投入')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbQtqdtr" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('本年度')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbBnd" maxlength="64" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('本年度技术开发项目预算总金额')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbBndjskfxmyszje" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('本年度企业自筹投入')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbBndqyzctr" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('本年度其它渠道投入')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbBndqtqdtr" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('研发活性直接消耗的材料、燃料和动力费用')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbYfhxzjxh" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('直接从事研发活动的本企业在职人员费用')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbZjcsyfhddbqyzzryfy" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('专业用于研发活动相关折旧费')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbZyyyyfhdxgzjf" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('专门用于研发活动的有关租赁费')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbZmyyyfhddygzlf" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('专门用于研发活动的有关无形资产摊销费')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbZmyyyfhddygwxzctxf" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('专门用于中间实验和产品试制的模具、工艺装备开发及制造费')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbZmyyzjsyhcpszdmjgyzbkfjzzf" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('研究成果论证、鉴定、评审、验收费用')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbYjcglzjdpsysfy" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('与研发活动直接相关的其它费用')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbYyfhdzjxgdqtfy" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('研究开发投入额合计')}：</label>
+					<div class="control-inline">
+						<#form:input path="yffyysmxbYjkftrehj" maxlength="17" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i> ${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm isQuick"><i class="glyphicon glyphicon-repeat"></i> ${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+//# // 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $('#searchForm'),
+	columnModel: [
+		{header:'${text("开发项目名称")}', name:'yffyysmxbKfxmmc', index:'a.yffyysmxb_kfxmmc', width:150, align:"center", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/core/coreYffyysmxb/form?id='+row.id+'" class="btnList" data-title="${text("编辑研发费用预算明细表")}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text("项目预期研发时间")}', name:'yffyysmxbXmyqyfsj', index:'a.yffyysmxb_xmyqyfsj', width:150, align:"center"},
+		{header:'${text("研发费用预算总金额")}', name:'yffyysmxbYffyyszje', index:'a.yffyysmxb_yffyyszje', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		// {header:'${text("企业自筹投入")}', name:'yffyysmxbQyzctr', index:'a.yffyysmxb_qyzctr', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("其他渠道投入")}', name:'yffyysmxbQtqdtr', index:'a.yffyysmxb_qtqdtr', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("本年度")}', name:'yffyysmxbBnd', index:'a.yffyysmxb_bnd', width:150, align:"center"},
+		// {header:'${text("本年度技术开发项目预算总金额")}', name:'yffyysmxbBndjskfxmyszje', index:'a.yffyysmxb_bndjskfxmyszje', width:150, align:"right", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("本年度企业自筹投入")}', name:'yffyysmxbBndqyzctr', index:'a.yffyysmxb_bndqyzctr', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("本年度其它渠道投入")}', name:'yffyysmxbBndqtqdtr', index:'a.yffyysmxb_bndqtqdtr', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("研发活性直接消耗的材料、燃料和动力费用")}', name:'yffyysmxbYfhxzjxh', index:'a.yffyysmxb_yfhxzjxh', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("直接从事研发活动的本企业在职人员费用")}', name:'yffyysmxbZjcsyfhddbqyzzryfy', index:'a.yffyysmxb_zjcsyfhddbqyzzryfy', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("专业用于研发活动相关折旧费")}', name:'yffyysmxbZyyyyfhdxgzjf', index:'a.yffyysmxb_zyyyyfhdxgzjf', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("专门用于研发活动的有关租赁费")}', name:'yffyysmxbZmyyyfhddygzlf', index:'a.yffyysmxb_zmyyyfhddygzlf', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("专门用于研发活动的有关无形资产摊销费")}', name:'yffyysmxbZmyyyfhddygwxzctxf', index:'a.yffyysmxb_zmyyyfhddygwxzctxf', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("专门用于中间实验和产品试制的模具、工艺装备开发及制造费")}', name:'yffyysmxbZmyyzjsyhcpszdmjgyzbkfjzzf', index:'a.yffyysmxb_zmyyzjsyhcpszdmjgyzbkfjzzf', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("研究成果论证、鉴定、评审、验收费用")}', name:'yffyysmxbYjcglzjdpsysfy', index:'a.yffyysmxb_yjcglzjdpsysfy', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("与研发活动直接相关的其它费用")}', name:'yffyysmxbYyfhdzjxgdqtfy', index:'a.yffyysmxb_yyfhdzjxgdqtfy', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		// {header:'${text("研究开发投入额合计")}', name:'yffyysmxbYjkftrehj', index:'a.yffyysmxb_yjkftrehj', width:150, align:"center", formatter: function(val, obj, row, act){
+		// 	return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		// }},
+		{header:'${text("操作")}', name:'actions', width:120, formatter: function(val, obj, row, act){
+			var actions = [];
+			//# if(hasPermi('core:coreYffyysmxb:edit')){
+				actions.push('<a href="${ctx}/core/coreYffyysmxb/form?id='+row.id+'" class="btnList" title="${text("编辑研发费用预算明细表")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/core/coreYffyysmxb/delete?id='+row.id+'" class="btnList" title="${text("删除研发费用预算明细表")}" data-confirm="${text("确认要删除该研发费用预算明细表吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			//# }
+			return actions.join('');
+		}}
+	],
+	//# // 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

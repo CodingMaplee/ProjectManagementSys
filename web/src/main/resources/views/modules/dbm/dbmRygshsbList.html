@@ -1,0 +1,95 @@
+<% layout('/layouts/default.html', {title: '人员工时核算表管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-notebook"></i> ${text('人员工时核算表管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('dbm:dbmRygshsb:edit')){ %>
+					<a href="${ctx}/dbm/dbmRygshsb/form" class="btn btn-default btnTool" title="${text('新增人员工时核算表')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+				<a href="#" class="btn btn-default" id="btnSetting" title="${text('设置')}"><i class="fa fa-navicon"></i></a>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${dbmRygshsb}" action="${ctx}/dbm/dbmRygshsb/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('员工姓名')}：</label>
+					<div class="control-inline width-120">
+						<#form:select path="rygshsbYgxm" dictType="" blankOption="true" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('所属部门')}：</label>
+					<div class="control-inline">
+						<#form:input path="rygshsbSsbm" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('车间')}：</label>
+					<div class="control-inline">
+						<#form:input path="rygshsbCj" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('工时时间')}：</label>
+					<div class="control-inline">
+						<#form:input path="rygshsbGssj" maxlength="8" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('确认签字')}：</label>
+					<div class="control-inline">
+						<#form:input path="rygshsbQrqz" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('备注')}：</label>
+					<div class="control-inline">
+						<#form:input path="rygshsbBz" maxlength="100" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i> ${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm isQuick"><i class="glyphicon glyphicon-repeat"></i> ${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+//# // 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $('#searchForm'),
+	columnModel: [
+		{header:'${text("员工姓名")}', name:'rygshsbYgxm', index:'a.rygshsb_ygxm', width:150, align:"center", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/dbm/dbmRygshsb/form?id='+row.id+'" class="btnList" data-title="${text("编辑人员工时核算表")}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text("所属部门")}', name:'rygshsbSsbm', index:'a.rygshsb_ssbm', width:150, align:"center"},
+		{header:'${text("车间")}', name:'rygshsbCj', index:'a.rygshsb_cj', width:150, align:"left"},
+		{header:'${text("工时时间")}', name:'rygshsbGssj', index:'a.rygshsb_gssj', width:150, align:"center", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text("确认签字")}', name:'rygshsbQrqz', index:'a.rygshsb_qrqz', width:150, align:"center"},
+		{header:'${text("备注")}', name:'rygshsbBz', index:'a.rygshsb_bz', width:150, align:"center"},
+		{header:'${text("操作")}', name:'actions', width:120, formatter: function(val, obj, row, act){
+			var actions = [];
+			//# if(hasPermi('dbm:dbmRygshsb:edit')){
+				actions.push('<a href="${ctx}/dbm/dbmRygshsb/form?id='+row.id+'" class="btnList" title="${text("编辑人员工时核算表")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/dbm/dbmRygshsb/delete?id='+row.id+'" class="btnList" title="${text("删除人员工时核算表")}" data-confirm="${text("确认要删除该人员工时核算表吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			//# }
+			return actions.join('');
+		}}
+	],
+	//# // 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>

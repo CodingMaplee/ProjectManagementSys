@@ -1,0 +1,581 @@
+<% layout('/layouts/default.html', {title: '研发费用加计扣除优惠明细表管理', libs: ['validate','fileupload']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreYffyjjkcyhmxb.isNewRecord ? '新增研发费用加计扣除优惠明细表' : '编辑研发费用加计扣除优惠明细表')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreYffyjjkcyhmxb}" action="${ctx}/core/coreYffyjjkcyhmxb/save" method="post" class="form-horizontal">
+			<div class="table-fdiv width-1280">
+				<table class="table-form">
+					<tr class="form-title">
+						<td colspan="8" class="form-label" >A107012研发费用加计扣除优惠明细表</td>
+					</tr>
+					<tr>
+						<td colspan="6"  class="form-label" width="600">研发活动费用明细</td>
+						<td colspan="2" width="150">
+							<#form:select path="yffyjjkcyhmxbYfhdfymx" dictType="" blankOption="true" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">3</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 一、自主研发、合作研发、集中研发（4+8+17+20+24+35）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbZzyfhzyfjzyf" id="yffyjjkcyhmxbZzyfhzyfjzyfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">4</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（一）人员人工费用（5+6+7）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbRyrgfy" id="yffyjjkcyhmxbRyrgfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">5</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.直接从事研发活动人员工资薪金</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbZjcsyfhdrygzxj" id="yffyjjkcyhmxbZjcsyfhdrygzxjId" maxlength="100"
+							class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">6</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.直接从事研发活动人员五险一金</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbZjcsyfhdrywxyj" id="yffyjjkcyhmxbZjcsyfhdrywxyjId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">7</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.外聘研发人员的劳务费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbWpyfrydlwfy" id="yffyjjkcyhmxbWpyfrydlwfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">8</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（二）直接投入费用（9+10+···+16）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbZjtrfy" id="yffyjjkcyhmxbZjtrfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">9</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.研发活动直接消耗材料</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYfhdzjxhcl" id="yffyjjkcyhmxbYfhdzjxhclId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">10</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.研发活动直接消耗燃料</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYfhdzjxhrl" id="yffyjjkcyhmxbYfhdzjxhrlId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">11</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.研发活动直接消耗动力费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYfhdzjxhdlfy" id="yffyjjkcyhmxbYfhdzjxhdlfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">12</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.用于中间试验和产品试制的模具、工艺装备开发及制造费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyzjsyhcpszdmjgyzbkfjzzf" id="yffyjjkcyhmxbYyzjsyhcpszdmjgyzbkfjzzfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">13</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.用于不构成固定资产的样品、样机及一般测试手段购置费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYybgcgdzcdypyjjybcssdgzf" id="yffyjjkcyhmxbYybgcgdzcdypyjjybcssdgzfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">14</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.用于试制产品的检验费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyszcpdjyf" id="yffyjjkcyhmxbYyszcpdjyfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">15</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.用于研发活动的仪器、设备的运行维护、调整、检验、维修等费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyyfhddyqsbdyxwhdzjywxdfy" id="yffyjjkcyhmxbYyyfhddyqsbdyxwhdzjywxdfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">16</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.通过经营租凭方式租入的用于研发活动的仪器、设备租凭费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbTgjyzpfszrdyyyfhddyqsbzpf" id="yffyjjkcyhmxbTgjyzpfszrdyyyfhddyqsbzpfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">17</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（三）折旧费用（18+19）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbZjfy" id="yffyjjkcyhmxbZjfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">18</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.用于研发活动的仪器的折旧费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyyfhddyqdzjf" id="yffyjjkcyhmxbYyyfhddyqdzjfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">19</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.用于研发活动的设备的折旧费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyyfhddsbdzjf" id="yffyjjkcyhmxbYyyfhddsbdzjf" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">20</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（四）无形资产摊销（21+22+23）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbWxzctx" id="yffyjjkcyhmxbWxzctxId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">21</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.用于研发活动的软件的摊销费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyyfhddrjdtxfy" id="yffyjjkcyhmxbYyyfhddrjdtxfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">22</td>
+						<td colspan="5" width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.用于研发活动的专利权的摊销费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyyfhddzlqdtxfy" id="yffyjjkcyhmxbYyyfhddzlqdtxfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">23</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.用于研发活动的非专利技术</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYyyfhddfzljs" id="yffyjjkcyhmxbYyyfhddfzljsId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">24</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（五）新产品设计费等（25+26+27+28）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbXcpsjfd" id="yffyjjkcyhmxbXcpsjfdId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">25</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.新产品设计费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbXcpsjf" id="yffyjjkcyhmxbXcpsjfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">26</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.新工艺规程制定费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbXgygczdf" id="yffyjjkcyhmxbXgygczdfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">27</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.新药研制的临床试验费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbXyyzdlcsyf" id="yffyjjkcyhmxbXyyzdlcsyfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">28</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.勘探开发技术的现场试验费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbKtkfjsdxcsyf" id="yffyjjkcyhmxbKtkfjsdxcsyfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">29</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（六）其他相关费用（30+31+32+33+34）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbQtxgfy" id="yffyjjkcyhmxbQtxgfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">30</td>
+						<td colspan="5" width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.技术图书馆资料费、资料翻译费、专家咨询费、高新科技研发保险费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbJstsgzlfzlfyfzjzxfgxkjyfbxf" id="yffyjjkcyhmxbJstsgzlfzlfyfzjzxfgxkjyfbxfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">31</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.研发成果的检索、分析、评议、论证、鉴定、评审、评估、验收费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYfcgdjsfxpylzjdpspgysfy" id="yffyjjkcyhmxbYfcgdjsfxpylzjdpspgysfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">32</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.知识产权的申请费、注册费、代理费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbZscqdsqfzcfdlf" id="yffyjjkcyhmxbZscqdsqfzcfdlfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">33</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.职工福利费、补充养老保险费、补充医疗保险费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbZgflfbcylbxfbcylbxf" id="yffyjjkcyhmxbZgflfbcylbxfbcylbxfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">34</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.差旅费、会议费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbClfhyf" id="yffyjjkcyhmxbClfhyfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">35</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（七）经限额调整后的其他相关费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbJxedzhdqtxgfy" id="yffyjjkcyhmxbJxedzhdqtxgfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">36</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 二、委托研发[(37-38)*80%]</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbWtyf" id="yffyjjkcyhmxbWtyfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">37</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;委托外部机构或个人进行研发活动所发生的费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbWtwbjghgrjxyfhdsfsdfy" id="yffyjjkcyhmxbWtwbjghgrjxyfhdsfsdfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">38</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中：委托境外进行研发活动所发生的费用</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbQzwtjwjxyfhdsfsdfy" id="yffyjjkcyhmxbQzwtjwjxyfhdsfsdfyId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">39</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 三、年度研发费用小计(3+36)</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbNdyffyxj" id="yffyjjkcyhmxbNdyffyxjId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">40</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（一）本年费用化金额</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbBnfyhje" id="yffyjjkcyhmxbBnfyhjeId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">41</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;（二）本年资产化金额</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbBnzchje" id="yffyjjkcyhmxbBnzchjeId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">42</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 四、本年形成无形资产摊销费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbBnxcwxzctxf" id="yffyjjkcyhmxbBnxcwxzctxfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">43</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 五、以前年度形成无形资产本年摊销费</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYqndxcwxzcbntxf" id="yffyjjkcyhmxbYqndxcwxzcbntxfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">44</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 六、允许扣除的研发费用合计（40+42+43）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYxkcdyffyhj" id="yffyjjkcyhmxbYxkcdyffyhjId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">45</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;减：特殊收入部分</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbJtssrbf" id="yffyjjkcyhmxbJtssrbfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">46</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 七、允许扣除的研发费用抵制特殊收入后的金额（44-45）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbYxkcdyffydztssrhdje" id="yffyjjkcyhmxbYxkcdyffydztssrhdjeId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">47</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;减：当年销售研发活动直接形成产品（包括组成部分）对应的材料部分</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbJdnxsyfhdzjxccpbkzcbfdydclbf" id="yffyjjkcyhmxbJdnxsyfhdzjxccpbkzcbfdydclbfId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">48</td>
+						<td colspan="5"  width="150"><span class="required">*</span> &nbsp;&nbsp;&nbsp;减：以前年度销售研发活动直接形成产品（包括组成部分）对应的材料部分结转金</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbJyqndxsyfhdzjxccpbkzcbfdydclbfjzj" id="yffyjjkcyhmxbJyqndxsyfhdzjxccpbkzcbfdydclbfjzjId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">49</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 八、加计扣除比例</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbJjkcbl" id="yffyjjkcyhmxbJjkcblId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">50</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 九、本年研发费用加计扣除总额（46-47-48）* 49</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbBnyffyjjkcze" id="yffyjjkcyhmxbBnyffyjjkczeId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="1"  class="form-label" width="100">51</td>
+						<td colspan="5"  width="150"><span class="required">*</span> 十、销售研发活动直接形成产品（包括组成部分）对应材料部分结转以后年度扣除金额（当46-47-48>=0,本行=0；当46-47-48<0,本行=46-47-48的绝对值）</td>
+						<td colspan="2">
+							<#form:input path="yffyjjkcyhmxbXsyfhdzjxccpbkzcbfdyclbfjzyhndkcje" id="yffyjjkcyhmxbXsyfhdzjxccpbkzcbfdyclbfjzyhndkcjeId" maxlength="100"
+							class="form-control "/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="box-body">
+				<div class="form-unit">${text('基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('项目编号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:select path="yffyjjkcyhmxbXmbh" dictType="" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('项目名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:select path="yffyjjkcyhmxbXmmc" dictType="" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2">
+								<span class="required hide">*</span> ${text('附件上传')}：</label>
+							<div class="col-sm-10">
+								<#form:fileupload id="uploadFile" bizKey="${coreYffyjjkcyhmxb.id}" bizType="coreYffyjjkcyhmxb_file"
+									uploadType="all" class="" readonly="false" preview="true" dataMap="true"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('core:coreYffyjjkcyhmxb:edit')){ %>
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#yffyjjkcyhmxbYfhdfymx').empty();
+				// 添加默认选择项
+				$('#yffyjjkcyhmxbYfhdfymx').append('<option value="">-- 请选择项目编号 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmbh)       // 设定 value 为项目的ID
+							.text(item.gcglXmbh);  // 显示项目的ID
+					$('#yffyjjkcyhmxbYfhdfymx').append(option);
+				});
+				if ('${coreYffyjjkcyhmxb.isNewRecord}' === 'false') {
+					// 假设 `coreYffyjjkcyhmxb` 对象中包含当前项目的 ID
+					var currentProjectId = '${coreYffyjjkcyhmxb.yffyjjkcyhmxbYfhdfymx}'; // 获取当前项目 ID
+					$('#yffyjjkcyhmxbYfhdfymx').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+});
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#yffyjjkcyhmxbXmbh').empty();
+				// 添加默认选择项
+				$('#yffyjjkcyhmxbXmbh').append('<option value="">-- 请选择项目编号 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmbh)       // 设定 value 为项目的ID
+							.text(item.gcglXmbh);  // 显示项目的ID
+					$('#yffyjjkcyhmxbXmbh').append(option);
+				});
+				// 如果是编辑模式，填充当前选中的项目 ID
+				if ('${coreYffyjjkcyhmxb.isNewRecord}' === 'false') {
+					// 假设 `coreYffyjjkcyhmxb` 对象中包含当前项目的 ID
+					var currentProjectId = '${coreYffyjjkcyhmxb.yffyjjkcyhmxbXmbh}'; // 获取当前项目 ID
+					$('#yffyjjkcyhmxbXmbh').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+});
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#yffyjjkcyhmxbXmmc').empty();
+				// 添加默认选择项
+				$('#yffyjjkcyhmxbXmmc').append('<option value="">-- 请选择项目名称 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmmc)       // 设定 value 为项目名称
+							.text(item.gcglXmmc);  // 显示项目名称
+					$('#yffyjjkcyhmxbXmmc').append(option);
+				});
+				// 如果是编辑模式，填充当前选中的项目名称
+				if ('${coreYffyjjkcyhmxb.isNewRecord}' === 'false') {
+					// 假设 `coreYffyjjkcyhmxb` 对象中包含当前项目的名称
+					var currentProjectId = '${coreYffyjjkcyhmxb.yffyjjkcyhmxbXmmc}'; // 获取当前项目名称
+					$('#yffyjjkcyhmxbXmmc').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+});
+</script>

@@ -1,0 +1,566 @@
+<% layout('/layouts/default.html', {title: '项目开发进度记录表管理', libs: ['validate','fileupload']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreXmkfjdjlb.isNewRecord ? '新增项目开发进度记录表' : '编辑项目开发进度记录表')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreXmkfjdjlb}" action="${ctx}/core/coreXmkfjdjlb/save" method="post" class="form-horizontal">
+			<div class="table-fdiv width-1280">
+				<h3>项目开发进度记录表-2021年12月-2023年3月</h3>
+				<table class="table-form">
+					<tr class="form-title">
+						<td colspan="2" class="form-label" width="200"> 日期</td>
+						<td colspan="1" class="form-label" width="200"> 立项申请</td>
+						<td colspan="2" class="form-label" width="100"> 可行性评估报告</td>
+						<td colspan="1" class="form-label" width="100"> 立项决议</td>
+						<td colspan="2" class="form-label" width="200"> 阶段性汇报记录</td>
+						<td colspan="2" class="form-label" width="200"> 试产报告</td>
+						<td colspan="2" class="form-label" width="300"> 结题报告</td>
+						<td colspan="1" class="form-label" width="100"> 备注</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq1" id="xmkfjdjlbRq1Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq1" id="xmkfjdjlbLxsq1Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg1" id="xmkfjdjlbKxxpgbg1Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy1" id="xmkfjdjlbLxjy1Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl1" id="xmkfjdjlbJdxhbjl1Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg1" id="xmkfjdjlbScbg1Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg1" id="xmkfjdjlbJtbg1Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz1" id="xmkfjdjlbBz1Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq2" id="xmkfjdjlbRq2Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq2" id="xmkfjdjlbLxsq2Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg2" id="xmkfjdjlbKxxpgbg2Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy2" id="xmkfjdjlbLxjy2Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl2" id="xmkfjdjlbJdxhbjl2Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg2" id="xmkfjdjlbScbg2Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg2" id="xmkfjdjlbJtbg2Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz2" id="xmkfjdjlbBz2Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq3" id="xmkfjdjlbRq3Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq3" id="xmkfjdjlbLxsq3Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg3" id="xmkfjdjlbKxxpgbg3Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy3" id="xmkfjdjlbLxjy3Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl3" id="xmkfjdjlbJdxhbjl3Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg3" id="xmkfjdjlbScbg3Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg3" id="xmkfjdjlbJtbg3Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz3" id="xmkfjdjlbBz3Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq4" id="xmkfjdjlbRq4Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq4" id="xmkfjdjlbLxsq4Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg4" id="xmkfjdjlbKxxpgbg4Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy4" id="xmkfjdjlbLxjy4Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl4" id="xmkfjdjlbJdxhbjl4Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg4" id="xmkfjdjlbScbg4Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg4" id="xmkfjdjlbJtbg4Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz4" id="xmkfjdjlbBz4Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq5" id="xmkfjdjlbRq5Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq5" id="xmkfjdjlbLxsq5Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg5" id="xmkfjdjlbKxxpgbg5Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy5" id="xmkfjdjlbLxjy5Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl5" id="xmkfjdjlbJdxhbjl5Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg5" id="xmkfjdjlbScbg5Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg5" id="xmkfjdjlbJtbg5Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz5" id="xmkfjdjlbBz5Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq6" id="xmkfjdjlbRq6Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq6" id="xmkfjdjlbLxsq6Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg6" id="xmkfjdjlbKxxpgbg6Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy6" id="xmkfjdjlbLxjy6Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl6" id="xmkfjdjlbJdxhbjl6Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg6" id="xmkfjdjlbScbg6Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg6" id="xmkfjdjlbJtbg6Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz6" id="xmkfjdjlbBz6Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq7" id="xmkfjdjlbRq7Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq7" id="xmkfjdjlbLxsq7Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg7" id="xmkfjdjlbKxxpgbg7Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy7" id="xmkfjdjlbLxjy7Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl7" id="xmkfjdjlbJdxhbjl7Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg7" id="xmkfjdjlbScbg7Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg7" id="xmkfjdjlbJtbg7Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz7" id="xmkfjdjlbBz7Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq8" id="xmkfjdjlbRq8Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq8" id="xmkfjdjlbLxsq8Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg8" id="xmkfjdjlbKxxpgbg8Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy8" id="xmkfjdjlbLxjy8Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl8" id="xmkfjdjlbJdxhbjl8Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg8" id="xmkfjdjlbScbg8Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg8" id="xmkfjdjlbJtbg8Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz8" id="xmkfjdjlbBz8Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq9" id="xmkfjdjlbRq9Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq9" id="xmkfjdjlbLxsq9Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg9" id="xmkfjdjlbKxxpgbg9Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy9" id="xmkfjdjlbLxjy9Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl9" id="xmkfjdjlbJdxhbjl9Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg9" id="xmkfjdjlbScbg9Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg9" id="xmkfjdjlbJtbg9Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz9" id="xmkfjdjlbBz9Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq10" id="xmkfjdjlbRq10Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq10" id="xmkfjdjlbLxsq10Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg10" id="xmkfjdjlbKxxpgbg10Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy10" id="xmkfjdjlbLxjy10Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl10" id="xmkfjdjlbJdxhbjl10Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg10" id="xmkfjdjlbScbg10Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg10" id="xmkfjdjlbJtbg10Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz10" id="xmkfjdjlbBz10Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width=150">
+							<#form:input path="xmkfjdjlbRq11" id="xmkfjdjlbRq11Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq11" id="xmkfjdjlbLxsq11Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg11" id="xmkfjdjlbKxxpgbg11Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy11" id="xmkfjdjlbLxjy11Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl11" id="xmkfjdjlbJdxhbjl11Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg11" id="xmkfjdjlbScbg11Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg11" id="xmkfjdjlbJtbg11Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz11" id="xmkfjdjlbBz11Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq12" id="xmkfjdjlbRq12Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq12" id="xmkfjdjlbLxsq12Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg12" id="xmkfjdjlbKxxpgbg12Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy12" id="xmkfjdjlbLxjy12Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl12" id="xmkfjdjlbJdxhbjl12Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg12" id="xmkfjdjlbScbg12Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg12" id="xmkfjdjlbJtbg12Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz12" id="xmkfjdjlbBz12Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq13" id="xmkfjdjlbRq13Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq13" id="xmkfjdjlbLxsq13Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg13" id="xmkfjdjlbKxxpgbg13Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy13" id="xmkfjdjlbLxjy13Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl13" id="xmkfjdjlbJdxhbjl13Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg13" id="xmkfjdjlbScbg13Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg1" id="xmkfjdjlbJtbg13Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz13" id="xmkfjdjlbBz13Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq14" id="xmkfjdjlbRq14Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq14" id="xmkfjdjlbLxsq14Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg14" id="xmkfjdjlbKxxpgbg14Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy14" id="xmkfjdjlbLxjy14Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl14" id="xmkfjdjlbJdxhbjl14Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg14" id="xmkfjdjlbScbg14Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg14" id="xmkfjdjlbJtbg14Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz14" id="xmkfjdjlbBz14Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="form-label" width="150">
+							<#form:input path="xmkfjdjlbRq15" id="xmkfjdjlbRq15Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbLxsq15" id="xmkfjdjlbLxsq15Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbKxxpgbg15" id="xmkfjdjlbKxxpgbg15Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbLxjy15" id="xmkfjdjlbLxjy15Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbJdxhbjl15" id="xmkfjdjlbJdxhbjl15Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="200">
+							<#form:input path="xmkfjdjlbScbg15" id="xmkfjdjlbScbg15Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="2" class="form-label" width="300">
+							<#form:input path="xmkfjdjlbJtbg15" id="xmkfjdjlbJtbg15Id" maxlength="150" class="form-control"/>
+						</td>
+						<td colspan="1" class="form-label" width="100">
+							<#form:input path="xmkfjdjlbBz15" id="xmkfjdjlbBz15Id" maxlength="150" class="form-control"/>
+						</td>
+					</tr>
+
+				</table>
+				<div style="display: flex; align-items: center;">
+					<span style="margin-right: 20px;">制表：</span>
+					<#form:input path="xmkfjdjlbZb" maxlength="500" class="form-control " style="width: 200px;"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="display: flex; align-items: center;">
+					<span style="margin-right: 20px;">审核：</span>
+					<#form:input path="xmkfjdjlbSh" maxlength="500" class="form-control " style="width: 200px;"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</div>
+				</div>
+			</div>
+		<div class="box-body">
+			<div class="form-unit">${text('基本信息')}</div>
+			<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('项目编号')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:select path="xmkfjdjlbXmbh" dictType="" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('项目名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:select path="xmkfjdjlbXmmc" dictType="" blankOption="true" class="form-control" />
+							</div>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2">
+								<span class="required hide">*</span> ${text('附件上传')}：</label>
+							<div class="col-sm-10">
+								<#form:fileupload id="uploadFile" bizKey="${coreXmkfjdjlb.id}" bizType="coreXmkfjdjlb_file"
+									uploadType="all" class="" readonly="false" preview="true" dataMap="true"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('core:coreXmkfjdjlb:edit')){ %>
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#xmkfjdjlbXmbh').empty();
+				// 添加默认选择项
+				$('#xmkfjdjlbXmbh').append('<option value="">-- 请选择项目编号 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmbh)       // 设定 value 为项目的ID
+							.text(item.gcglXmbh);  // 显示项目的ID
+					$('#xmkfjdjlbXmbh').append(option);
+				});
+				// 如果是编辑模式，填充当前选中的项目 ID
+				if ('${coreXmkfjdjlb.isNewRecord}' === 'false') {
+					// 假设 `coreXmkfjdjlb` 对象中包含当前项目的 ID
+					var currentProjectId = '${coreXmkfjdjlb.xmkfjdjlbXmbh}'; // 获取当前项目 ID
+					$('#xmkfjdjlbXmbh').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+});
+$(document).ready(function() {
+	// 使用 Ajax 从项目档案表接口获取项目信息
+	$.ajax({
+		url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#xmkfjdjlbXmmc').empty();
+				// 添加默认选择项
+				$('#xmkfjdjlbXmmc').append('<option value="">-- 请选择项目名称 --</option>');
+
+				// 遍历接口返回的项目数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.gcglXmmc)       // 设定 value 为项目名称
+							.text(item.gcglXmmc);  // 显示项目名称
+					$('#xmkfjdjlbXmmc').append(option);
+				});
+				// 如果是编辑模式，填充当前选中的项目名称
+				if ('${coreXmkfjdjlb.isNewRecord}' === 'false') {
+					// 假设 `coreXmkfjdjlb` 对象中包含当前项目的名称
+					var currentProjectId = '${coreXmkfjdjlb.xmkfjdjlbXmmc}'; // 获取当前项目名称
+					$('#xmkfjdjlbXmmc').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载项目数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取项目数据时发生错误！");
+		}
+	});
+});
+</script>

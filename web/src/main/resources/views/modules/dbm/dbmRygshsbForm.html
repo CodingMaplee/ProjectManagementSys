@@ -1,0 +1,172 @@
+<% layout('/layouts/default.html', {title: '人员工时核算表管理', libs: ['validate']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(dbmRygshsb.isNewRecord ? '新增人员工时核算表' : '编辑人员工时核算表')}
+			</div>
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${dbmRygshsb}" action="${ctx}/dbm/dbmRygshsb/save" method="post" class="form-horizontal">
+			<div class="box-body">
+				<div class="form-unit">${text('基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('员工姓名')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select id="rygshsbYgxm" name="rygshsbYgxm" class="form-control">
+									<option value="">-- 请选择员工 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								${text('部门')}：
+							</label>
+							<div class="col-sm-4">
+								<select id="rygshsbSsbm" name="rygshsbSsbm" class="form-control">
+									<option value="">-- 请选择部门 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('车间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="rygshsbCj" maxlength="100" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('工时时间')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="rygshsbGssj" maxlength="8" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('备注')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="rygshsbBz" maxlength="100" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('dbm:dbmRygshsb:edit')){ %>
+							<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+
+$(document).ready(function() {
+	// 使用 Ajax 从人员档案表接口获取员工信息
+	$.ajax({
+		url: '${ctx}/dbm/dbmRydab/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#rygshsbYgxm').empty();
+				// 添加默认选择项
+				$('#rygshsbYgxm').append('<option value="">-- 请选择员工 --</option>');
+
+				// 遍历接口返回的员工数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.rydabtXm)       // 设定 value 为员工的 ID
+							.text(item.rydabtXm);  // 显示员工的姓名
+					$('#rygshsbYgxm').append(option);
+				});
+				if ('${dbmRygshsb.isNewRecord}' === 'false') {
+					// 假设 `dbmRygshsb` 对象中包含当前项目的名称
+					var currentProjectId = '${dbmRygshsb.rygshsbYgxm}'; // 获取当前项目名称
+					$('#rygshsbYgxm').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载员工数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取员工数据时发生错误！");
+		}
+	});
+});
+$(document).ready(function() {
+	// 使用 Ajax 从部门档案表接口获取部门信息
+	$.ajax({
+		url: '${ctx}/dbm/dbmRydab/listData', // 修改为正确的接口路径
+		type: 'GET',
+		success: function(response) {
+			if (response && response.list) {
+				// 清空现有的下拉框选项
+				$('#rygshsbSsbm').empty();
+				// 添加默认选择项
+				$('#rygshsbSsbm').append('<option value="">-- 请选择部门 --</option>');
+
+				// 遍历接口返回的部门数据，动态添加到下拉框中
+				$.each(response.list, function(index, item) {
+					var option = $('<option></option>')
+							.val(item.rydabtSsbm)       // 设定 value 为部门的名称
+							.text(item.rydabtSsbm);  // 显示部门的名称
+					$('#rygshsbSsbm').append(option);
+				});
+				if ('${dbmRygshsb.isNewRecord}' === 'false') {
+					// 假设 `dbmRygshsb` 对象中包含当前项目的名称
+					var currentProjectId = '${dbmRygshsb.rygshsbSsbm}'; // 获取当前项目名称
+					$('#rygshsbSsbm').val(currentProjectId); // 设置下拉框的值
+				}
+			} else {
+				js.showMessage("加载部门数据失败！");
+			}
+		},
+		error: function() {
+			js.showMessage("获取部门数据时发生错误！");
+		}
+	});
+
+});
+</script>

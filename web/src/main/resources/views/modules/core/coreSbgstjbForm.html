@@ -1,0 +1,121 @@
+<% layout('/layouts/default.html', {title: '设备工时统计表管理', libs: ['validate']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-note"></i> ${text(coreSbgstjb.isNewRecord ? '新增设备工时统计表' : '编辑设备工时统计表')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="#" class="btn btn-default" id="btnSearch" title="查询"><i class="fa fa-filter"></i> 查询</a>
+				<% if(hasPermi('test:testData:edit')){ %>
+				<a href="${ctx}/test/testData/form" class="btn btn-default btnTool" title="新增数据"><i class="fa fa-plus"></i> 新增</a>
+				<% } %>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="inputForm" model="${coreSbgstjb}" action="${ctx}/core/coreSbgstjb/save" method="post" class="form-horizontal">
+			<div class="box-body">
+				<div class="form-unit">${text('基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('项目名称')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<select id="sbgstjbXmid" name="sbgstjbXmid" class="form-control">
+									<option value="">-- 请选择项目 --</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<#form:hidden path="sbgstjbZbid"/>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('该周日期')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="sbgstjbGzrq" maxlength="100" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-sm-2" title="">
+								<span class="required hide">*</span> ${text('该周总工时')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-4">
+								<#form:input path="sbgstjbGzzgs" maxlength="8" class="form-control number"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+
+						<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+</div>
+<% } %>
+<script>
+	$("#inputForm").validate({
+		submitHandler: function(form){
+			js.ajaxSubmitForm($(form), function(data){
+				js.showMessage(data.message);
+				if(data.result == Global.TRUE){
+					js.closeCurrentTabPage(function(contentWindow){
+						contentWindow.page();
+					});
+				}
+			}, "json");
+		}
+	});
+
+	$(document).ready(function() {
+		// 使用 Ajax 从人员档案表接口获取员工信息
+		$.ajax({
+			url: '${ctx}/core/coreXmglxxb/listData', // 修改为正确的接口路径
+			type: 'GET',
+			success: function(response) {
+				if (response && response.list) {
+					// 清空现有的下拉框选项
+					$('#sbgstjbXmid').empty();
+					// 添加默认选择项
+					$('#sbgstjbXmid').append('<option value="">-- 请选择项目 --</option>');
+
+					// 遍历接口返回的员工数据，动态添加到下拉框中
+					$.each(response.list, function(index, item) {
+						var option = $('<option></option>')
+								.val(item.id)       // 设定 value 为项目的 ID
+								.text(item.gcglXmmc);  // 显示项目的 ID
+						$('#sbgstjbXmid').append(option);
+					});
+					// 如果是编辑模式，填充当前选中的项目 ID
+					if ('${coreSbgstjb.isNewRecord}' === 'false') {
+						// 假设 `coreSbgstjb` 对象中包含当前项目的 ID
+						var currentProjectId = '${coreSbgstjb.sbgstjbXmid}'; // 获取当前项目 ID
+						$('#sbgstjbXmid').val(currentProjectId); // 设置下拉框的值
+					}
+				} else {
+					js.showMessage("加载员工数据失败！");
+				}
+			},
+			error: function() {
+				js.showMessage("获取员工数据时发生错误！");
+			}
+		});
+	});
+
+</script>

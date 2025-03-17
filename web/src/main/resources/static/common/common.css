@@ -1,0 +1,96 @@
+/*!
+ * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
+ * No deletion without permission, or be held responsible to law.
+ * 项目自定义的公共CSS，可覆盖jeesite.css里的样式
+ */
+/* 横向时间线容器 */
+.timeline-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 时间线主容器，允许横向滚动 */
+.timeline {
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+    padding: 20px 0;
+}
+
+/* 时间线项容器 */
+.timeline-items {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.timeline-item {
+    position: relative;
+    width: 300px;
+    margin-right: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateY(-5px);
+}
+
+/* 时间线标识圆圈 */
+.timeline-icon {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #ccc;
+    border: 2px solid #fff;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: background-color 0.3s ease;
+}
+
+/* 时间线内容 */
+.timeline-content h4 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.timeline-content p {
+    font-size: 14px;
+    color: #666;
+}
+
+.timeline-item.pending .timeline-icon {
+    background-color: #f0ad4e;  /* 橙色 */
+}
+
+.timeline-item.ongoing .timeline-icon {
+    background-color: #5bc0de;  /* 蓝色 */
+}
+
+.timeline-item.completed .timeline-icon {
+    background-color: #5cb85c;  /* 绿色 */
+}
+
+.timeline-item.not-determined .timeline-icon {
+    background-color: #fff;
+    border: 2px solid #ccc;
+}
+
+/* 横向时间线的滚动效果 */
+.timeline::-webkit-scrollbar {
+    height: 8px;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}

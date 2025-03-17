@@ -1,0 +1,212 @@
+<% layout('/layouts/default.html', {title: '研发费用预算明细表管理', libs: ['validate']}){ %>
+<div class="main-content print-form">
+	<div class="box box-main">
+		<div class="box-header with-border">
+			<div class="box-tools pull-right hide">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			</div>
+		</div>
+		<#form:form id="inputForm" model="${coreYffyysmxb}" action="${ctx}/core/coreYffyysmxb/save2" method="post" class="form-horizontal">
+			<div class="table-fdiv width-1280">
+				<h3>企业研究开发项目费用预算表</h3>
+				<table class="table-form">
+					<tr class="form-title">
+						<td colspan="1">企业名称（盖章）：</td>
+						<td colspan="2">
+							<#form:input path="testInput" maxlength="200" class="form-control required"/>
+						</td>
+						<td colspan="1">金额单位：万元</td>
+					</tr>
+					<tr>
+						<td rowspan="6" width="100">企业技术开发项目情况</td>
+						<td class="form-label-" width="150"><span class="required">*</span> 技术开发项目名称</td>
+						<td colspan="2">
+							<#form:input path="yffyysmxbKfxmmc" id="yffyysmxbKfxmmcId" maxlength="100"
+							class="form-control required"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" width="150"><span class="required">*</span> 项目预期研发时间</td>
+						<td colspan="2">
+							<#form:input path="yffyysmxbXmyqyfsj" id="yffyysmxbXmyqyfsjId" maxlength="200" class="form-control required"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" width="150"> 技术开发项目研发费用预算总金额</td>
+						<td class="form-label" width="150"> 企业自筹投入</td>
+						<td class="form-label" width="100"> 其他渠道投入</td>
+					</tr>
+					<tr>
+						<td>
+							<#form:input path="yffyysmxbYffyyszje" id="yffyysmxbYffyyszjeId" maxlength="150" class="form-control"/>
+						</td>
+						<td>
+							<#form:input path="yffyysmxbQyzctr" maxlength="150" class="form-control"/>
+						</td>
+						<td>
+							<#form:input path="yffyysmxbQtqdtr" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" width="150"> 本年度技术开发项目预算总金额</td>
+						<td class="form-label" width="150"> 本年度企业自筹投入</td>
+						<td class="form-label" width="100"> 本年度其它渠道投入
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<#form:input path="yffyysmxbBndjskfxmyszje" maxlength="150" class="form-control"/>
+						</td>
+						<td>
+							<#form:input path="yffyysmxbBndqyzctr" maxlength="150" class="form-control"/>
+						</td>
+						<td>
+							<#form:input path="yffyysmxbBndqtqdtr" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="9" width="100">项目本年度预算支出</td>
+						<td class="form-label" colspan="2">一、研发活性直接消耗的材料、燃料和动力费用</td>
+						<td>
+							<#form:input path="yffyysmxbYfhxzjxh" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">二、直接从事研发活动的本企业在职人员费用</td>
+						<td>
+							<#form:input path="yffyysmxbZjcsyfhddbqyzzryfy" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">三、专业用于研发活动相关折旧费</td>
+						<td>
+							<#form:input path="yffyysmxbZyyyyfhdxgzjf" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">四、专门用于研发活动的有关租赁费</td>
+						<td>
+							<#form:input path="yffyysmxbZmyyyfhddygzlf" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">五、专门用于研发活动的有关无形资产摊销费</td>
+						<td>
+							<#form:input path="yffyysmxbZmyyyfhddygwxzctxf" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">六、专门用于中间实验和产品试制的模具、工艺装备开发及制造费</td>
+						<td>
+							<#form:input path="yffyysmxbZmyyzjsyhcpszdmjgyzbkfjzzf" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">七、研究成果论证、鉴定、评审、验收费用</td>
+						<td>
+							<#form:input path="yffyysmxbYjcglzjdpsysfy" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">八、与研发活动直接相关的其它费用</td>
+						<td>
+							<#form:input path="yffyysmxbYyfhdzjxgdqtfy" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label" colspan="2">研究开发投入额合计</td>
+						<td>
+							<#form:input path="yffyysmxbYjkftrehj" maxlength="100" class="form-control"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="box-body">
+				<div class="form-unit">${text('基本信息')}</div>
+				<#form:hidden path="id"/>
+				<div class="row">
+
+					<div class="col-xs-6">
+						<div class="form-group">
+							<label class="control-label col-sm-4" title="">
+								<span class="required hide">*</span> ${text('本年度')}：<i class="fa icon-question hide"></i></label>
+							<div class="col-sm-8">
+								<#form:input path="yffyysmxbBnd" maxlength="64" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="row">
+					<div class="col-sm-offset-2 col-sm-10">
+						<% if (hasPermi('core:coreXmglxxb:edit')){ %>
+						<button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i> ${text('保 存')}</button>&nbsp;
+						<% } %>
+						<button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> ${text('关 闭')}</button>
+					</div>
+				</div>
+			</div>
+		</#form:form>
+	</div>
+</div>
+<% } %>
+<script>
+$("#inputForm").validate({
+	submitHandler: function(form){
+		js.ajaxSubmitForm($(form), function(data){
+			js.showMessage(data.message);
+			if(data.result == Global.TRUE){
+				js.closeCurrentTabPage(function(contentWindow){
+					contentWindow.page();
+				});
+			}
+		}, "json");
+    }
+});
+// function cancelDetail(){
+// 	parent.$('#detailModal').modal('hide');
+// }
+// function saveDetail() {
+// 	var form = $('#inputForm');
+// 	var url = form.attr('action');
+// 	//var xmglxxbYffyysmxbId = $('#id').val();
+//
+// 	// 将父表外键ID加入表单数据中
+// 	//form.append('<input type="hidden" name="xmglxxbYffyysmxbId" value="' + xmglxxbYffyysmxbId + '" />');
+//
+// 	$.ajax({
+// 		type: 'POST',
+// 		url: url,
+// 		data: form.serialize(),
+// 		success: function(response) {
+// 			if (response.success) {
+// 				var parentForm = parent.$('#inputForm'); // 父表的表单
+// 				parentForm.find('input[name="xmglxxbYffyysmxb"]').val(response.id);
+//
+// 				js.showMessage('保存成功');
+// 				// 关闭模态框
+// 				parent.$('#detailModal').modal('hide');
+// 			} else {
+// 				js.showMessage('保存失败：' + response.msg);
+// 			}
+// 		},
+// 		error: function() {
+// 			js.showMessage('保存出错');
+// 		}
+// 	});
+// }
+//
+// $(document).ready(function() {
+// 	// 获取URL参数
+// 	var urlParams = new URLSearchParams(window.location.search);
+// 	var kfxmmc = urlParams.get('yffyysmxbKfxmmcId');
+// 	var yffyyszje = urlParams.get('yffyyszje');
+// 	var startEndDate = urlParams.get('startEndDate');
+// 	// 设置表单字段值
+// 	$('#yffyysmxbKfxmmcId').val(kfxmmc);  // 设置开发项目名称
+// 	$('#yffyysmxbYffyyszjeId').val(yffyyszje);  // 设置研发费用总金额
+// 	$('#yffyysmxbXmyqyfsjId').val(startEndDate);
+//
+// });
+</script>
